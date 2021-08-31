@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def librarian
+      unless current_user.librarian?
+        flash[:danger] = "You don't have permission to perform this action."
+        redirect_to root_path
+      end
+    end
+
 end

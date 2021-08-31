@@ -17,4 +17,6 @@
   <% end %>
 </dl>
 
-<%= link_to "Go to users page", users_path, class: "btn btn-link" %>
+<% if current_user.librarian? %>
+  <%= link_to "Go to users page", users_path, class: "btn btn-link" %>
+<% end %>

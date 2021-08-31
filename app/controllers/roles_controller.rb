@@ -44,11 +44,4 @@ class RolesController < ApplicationController
       params.require(:role).permit(:name)
     end
 
-    def librarian
-      unless current_user.librarian?
-        flash[:danger] = "You don't have permission to perform this action."
-        redirect_to root_path
-      end
-    end
-
 end
