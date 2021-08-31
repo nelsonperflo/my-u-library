@@ -1,0 +1,14 @@
+<% provide(:title, "My profile") %>
+
+<% content_for :page_header do %>
+  <h1><%= yield(:title) %></h1>
+<% end %>
+
+<dl class="row">
+  <dt class="col-sm-2">First name</dt>
+  <dd class="col-sm-10"><%= @user.first_name %></dd>
+  <dt class="col-sm-2">Last Name</dt>
+  <dd class="col-sm-10"><%= @user.last_name %></dd>
+  <dt class="col-sm-2">Email</dt>
+  <dd class="col-sm-10"><%= @user.email %></dd>
+</dl>
