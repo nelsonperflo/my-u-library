@@ -1,0 +1,53 @@
+main.container {
+  margin-top: 70px;
+}
+
+/* 
+  ERRORES
+*/
+
+#error_explanation {
+  color: #d9534f;
+  ul {
+    color: #d9534f;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .is-invalid !optional;
+  label {
+    color: #d9534f;
+  }
+  .form-control {
+    color: red;
+    border-color: #d9534f;
+  }
+}
+
+.form-group.required .control-label:after {
+  content: "*";
+  color: red;
+}
+
+/* 
+  ORDEN DE COLUMNAS DE TABLA
+*/
+
+.table th {
+  .current {
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
+  }
+  .asc {
+    background-image: url(../images/up_arrow.gif);
+  }
+  .desc {
+    background-image: url(../images/down_arrow.gif);
+  }
+  a {
+    text-decoration: underline;
+    color: #000000;
+  }
+}
