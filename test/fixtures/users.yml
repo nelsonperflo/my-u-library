@@ -10,7 +10,7 @@ nelson:
   last_name: Perez
   email: nelson@example.com
   password_digest: <%= User.digest('Fargo01$-') %>
-  #rol: librarian
+  role: librarian
 
 <% 30.times do |n| %>
 usuario_<%= n %>:
@@ -18,5 +18,5 @@ usuario_<%= n %>:
   last_name: Example
   email: <%= "usuario-#{n}@example.com" %>
   password_digest: <%= User.digest('Fargo01$-') %>
-  #rol: student
+  role: student
 <% end %>

@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
 
+  def index
+    @users = User.includes(:role).order(id: :desc)
+    if params.has_key?(:search) && params[:search].present?
+      @users = User.search(params[:search])
+    end
+    @users = @users.paginate(page: params[:page])
+  end
+
   def new
     @user = User.new
   end
@@ -22,17 +30,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-    end
-
-    # Helper methods
-
-    def order_column
-      User.column_names.include?(params[:order]) ? params[:order] : "id"
-    end
-    
-    def order_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id)
     end
   
 end

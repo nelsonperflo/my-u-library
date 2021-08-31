@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  belongs_to :role
+
   before_save :email_to_lowercase
 
   validates :first_name, presence: true
@@ -18,8 +20,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }, format: { with: VALID_PASSWORD_REGEX }
 
  
-  def has_role?(*roles)
-    roles.include?(role.name)
+  def has_role?(*names)
+    names.include?(role.name)
   end
 
   def full_name
@@ -50,6 +52,14 @@ class User < ApplicationRecord
     else      
       where(nil)
     end
+  end
+
+  def librarian?
+    has_role?("librarian")
+  end
+
+  def student?
+    has_role("student")
   end
 
   private

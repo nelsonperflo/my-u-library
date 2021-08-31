@@ -4,6 +4,8 @@
   <h2>Welcome to the</h2>
   <h1>My U Library app!</h1>
   <p class="lead">
-    <%= link_to "Log in >>", login_path, class: "btn btn-lg btn-primary font-weight-bold" %>
+    <% unless logged_in? %>
+      <%= link_to "Log in >>", login_path, class: "btn btn-lg btn-primary font-weight-bold" %>
+    <% end %>
   </p>
 </div>

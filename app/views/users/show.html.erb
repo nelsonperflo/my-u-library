@@ -11,4 +11,10 @@
   <dd class="col-sm-10"><%= @user.last_name %></dd>
   <dt class="col-sm-2">Email</dt>
   <dd class="col-sm-10"><%= @user.email %></dd>
+  <% if current_user.librarian? %>
+    <dt class="col-sm-2">Role</dt>
+    <dd class="col-sm-10"><%= @user.role %></dd>
+  <% end %>
 </dl>
+
+<%= link_to "Go to users page", users_path, class: "btn btn-link" %>

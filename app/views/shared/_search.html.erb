@@ -1,0 +1,17 @@
+<%= form_tag(url, method: "get", class: "form-inline") do %>
+  <%= text_field_tag :search, params[:search], type: "search", class: "form-control form-control-sm", placeholder: "Search..." %>
+  &nbsp;
+  <div class="btn-group" role="group" aria-label="Search">
+    <%= button_to nil, "Search", class: "btn btn-outline-primary btn-sm" %>
+    <%= link_to "Cancel", url, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+
+  <small id="search_help" class="form-text text-muted">
+    <a role="button" data-toggle="collapse" href="#help" aria-expanded="false" aria-controls="help">
+      <i class=""></i> How to search...
+    </a>
+    <div class="collapse" id="help">
+      <%= content.html_safe %>
+    </div>
+  </small>
+<% end %>

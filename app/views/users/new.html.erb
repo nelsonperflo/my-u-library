@@ -1,4 +1,4 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Add new user') %>
 
 <% content_for :page_header do %>
   <%= yield(:title) %>
@@ -33,8 +33,14 @@
         <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
         <small id="password_confirmation_help" class="form-text text-black-50">Confirm password.</small>
       </div>
-      <%= f.submit "Create account", class: "btn btn-primary", data: { disable_with: "Processing..." } %>
-      <%= link_to 'Cancel', root_path, class: "btn btn-secondary" %>
+      <% if current_user.librarian? %>
+        <div class='form-group required'>
+          <%= f.label :role, class: 'control-label' %>
+          <%= f.collection_select :role_id, Role.all.order("name ASC"), :id, :name, { prompt: 'Select a role' }, { class: 'form-control', required: true }  %>
+        </div>
+      <% end %>
+      <%= f.submit nil, class: "btn btn-primary", data: { disable_with: "Processing..." } %>
+      <%= link_to 'Cancel', users_path, class: "btn btn-secondary" %>
     <% end %>
   </div>
 </div>
