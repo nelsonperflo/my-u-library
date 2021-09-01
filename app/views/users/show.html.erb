@@ -1,4 +1,8 @@
-<% provide(:title, "My profile") %>
+<% unless current_user.student? || current_user?(@user) %>
+  <% provide(:title, "User profile") %>
+<% else %>
+  <% provide(:title, "My profile") %>
+<% end %>
 
 <% content_for :page_header do %>
   <h1><%= yield(:title) %></h1>
@@ -19,5 +23,8 @@
 
 <% if current_user.librarian? %>
   <%= link_to "Go to users page", users_path, class: "btn btn-link" %>
+<% end %>
+
+<% unless current_user.student? || current_user?(@user) %>
   <%= link_to "Edit user", edit_user_path, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
