@@ -1,0 +1,28 @@
+<% provide(:title, 'Borrowings') %>
+
+<% content_for :page_header do %>
+  <h1><%= yield(:title) %></h1>
+<% end %>
+
+<p>
+  <%= link_to "New borrowing", new_borrowing_path, class: "btn btn-primary" %>
+</p>
+
+<% if @borrowings.size > 0 %>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>User</th>
+        <th>Book</th>
+        <th>Borrowed date</th>
+        <th>Return date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @borrowings %>
+    </tbody>
+  </table>
+  <%= will_paginate %>
+<% else %>
+  <h4>There are no borrowings.</h4>
+<% end %>

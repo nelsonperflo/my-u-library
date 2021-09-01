@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_210656) do
+ActiveRecord::Schema.define(version: 2021_09_01_023832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 2021_08_31_210656) do
     t.index ["author"], name: "index_books_on_author"
     t.index ["genre"], name: "index_books_on_genre"
     t.index ["title"], name: "index_books_on_title"
+  end
+
+  create_table "borrowings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.date "borrowed_date"
+    t.date "return_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_borrowings_on_book_id"
+    t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -49,5 +60,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_210656) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "borrowings", "books"
+  add_foreign_key "borrowings", "users"
   add_foreign_key "users", "roles"
 end
