@@ -28,7 +28,7 @@
         <h3 class="card-title">Quantity <span class="badge badge-secondary"><%= @book.stock.present? ? number_with_delimiter(@book.stock.quantity) : 0 %></span></h3>
         <% if current_user.student? && @book.stock.present? %>
           <% if @book.stock.available? %>
-            <%= link_to "Check out!", checkout_book_path(@book), class: "btn btn-primary", method: :patch %>
+            <%= link_to "Check out!", checkout_book_path(@book), class: "btn btn-primary", method: :patch, data: { confirm: "Are you sure?" } %>
           <% end %>
         <% end %>
       </div>

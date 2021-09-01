@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <%= form_with model: @user, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <% if f.object.persisted? && current_user.student? %>
+        <div class='form-group required'>
+        <%= f.label :first_name, class: 'control-label' %>
+        <%= f.text_field :first_name, class: 'form-control', readonly: true %>
+        <small id="first_name_help" class="form-text text-black-50">Enter the first name.</small>
+        </div>
+        <div class='form-group required'>
+          <%= f.label :last_name, class: 'control-label' %>
+          <%= f.text_field :last_name, class: 'form-control', readonly: true %>
+          <small id="last_name_help" class="form-text text-black-50">Enter the last name.</small>
+        </div>
+        <div class='form-group required'>
+          <%= f.label :email, class: 'control-label' %>
+          <%= f.email_field :email, class: 'form-control', readonly: true %>
+          <small id="email_help" class="form-text text-black-50">Enter the email address.</small>
+        </div>
+      <% else %>
+        <div class='form-group required'>
+        <%= f.label :first_name, class: 'control-label' %>
+        <%= f.text_field :first_name, class: 'form-control', required: false, autofocus: true %>
+        <small id="first_name_help" class="form-text text-black-50">Enter the first name.</small>
+        </div>
+        <div class='form-group required'>
+          <%= f.label :last_name, class: 'control-label' %>
+          <%= f.text_field :last_name, class: 'form-control', required: true %>
+          <small id="last_name_help" class="form-text text-black-50">Enter the last name.</small>
+        </div>
+        <div class='form-group required'>
+          <%= f.label :email, class: 'control-label' %>
+          <%= f.email_field :email, class: 'form-control', required: true %>
+          <small id="email_help" class="form-text text-black-50">Enter the email address.</small>
+        </div>
+      <% end %>
+      <div class='form-group required'>
+        <%= f.label :password, class: 'control-label' %>
+        <%= f.password_field :password, class: 'form-control', required: true %>
+        <small id="password_help" class="form-text text-black-50">Enter a strong password.</small>
+      </div>
+      <div class='form-group required'>
+        <%= f.label :password_confirmation, class: 'control-label' %>
+        <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+        <small id="password_confirmation_help" class="form-text text-black-50">Confirm password.</small>
+      </div>
+      <% if current_user.librarian? %>
+        <div class='form-group required'>
+          <%= f.label :role, class: 'control-label' %>
+          <%= f.collection_select :role_id, Role.all.order("name ASC"), :id, :name, { prompt: 'Select a role' }, { class: 'form-control', required: true }  %>
+        </div>
+      <% end %>
+      <%= f.submit nil, class: "btn btn-primary", data: { disable_with: "Processing..." } %>
+      <%= link_to 'Cancel', users_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+</div>

@@ -20,4 +20,5 @@ class Stock < ApplicationRecord
     self.quantity += 1
     self.save!
   end
+
 end

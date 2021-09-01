@@ -19,4 +19,5 @@
 
 <% if current_user.librarian? %>
   <%= link_to "Go to users page", users_path, class: "btn btn-link" %>
+  <%= link_to "Edit user", edit_user_path, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
