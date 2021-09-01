@@ -12,9 +12,11 @@
   </div>
 </p>
 
+<% if current_user.librarian? %>
 <p>
   <%= link_to "New book", new_book_path, class: "btn btn-primary" %>
 </p>
+<% end %>
 
 <% if @books.size > 0 %>
   <table class="table">

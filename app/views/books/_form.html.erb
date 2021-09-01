@@ -22,6 +22,13 @@
         <%= f.text_field :genre, class: 'form-control', required: true %>
         <small id="genre_help" class="form-text text-black-50">Enter the book's genre.</small>
       </div>
+      <% if f.object.new_record? %>
+        <div class='form-group required'>
+          <%= f.label :copies, class: 'control-label' %>
+          <%= f.number_field :copies, class: 'form-control', required: true %>
+          <small id="copies_help" class="form-text text-black-50">Enter the quantity of available copies of the book.</small>
+        </div>
+      <% end %>
       <%= f.submit nil, class: "btn btn-primary", data: { disable_with: "Processing..." } %>
       <%= link_to 'Cancel', books_path, class: "btn btn-secondary" %>
     <% end %>

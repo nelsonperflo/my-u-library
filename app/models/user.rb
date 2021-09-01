@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :role
+  has_many   :borrowings
 
   before_save :email_to_lowercase
 
@@ -54,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def student?
-    has_role("student")
+    has_role?("student")
   end
 
   private

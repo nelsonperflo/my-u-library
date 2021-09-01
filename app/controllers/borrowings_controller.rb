@@ -1,9 +1,13 @@
 class BorrowingsController < ApplicationController
   before_action :logged_in_user
-  before_action :librarian
+  before_action :librarian, except: :index
 
   def index
-    @borrowings = Borrowing.order(id: :desc).paginate(page: params[:page])
+    if current_user.student?
+      @borrowings = current_user.borrowings.includes(:book).order(id: :desc).paginate(page: params[:page])
+    else
+      @borrowings = Borrowing.includes(:book, :user).order(id: :desc).paginate(page: params[:page])
+    end
   end
 
   def new

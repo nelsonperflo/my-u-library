@@ -19,4 +19,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def student
+      unless current_user.student?
+        flash[:danger] = "You don't have permission to perform this action."
+        redirect_to root_path
+      end
+    end
+
 end

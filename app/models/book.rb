@@ -1,9 +1,13 @@
 class Book < ApplicationRecord
 
+  has_one   :stock
+  has_many  :borrowings
+
   validates :title, presence: true
   validates :author, presence: true
-  validates :published_year, presence: true
+  validates :published_year, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :genre, presence: true
+  validates :copies, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def to_s
     title

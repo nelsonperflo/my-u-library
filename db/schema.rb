@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_023832) do
+ActiveRecord::Schema.define(version: 2021_09_01_152735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_023832) do
     t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "copies", default: 0
     t.index ["author"], name: "index_books_on_author"
     t.index ["genre"], name: "index_books_on_genre"
     t.index ["title"], name: "index_books_on_title"
@@ -45,6 +46,14 @@ ActiveRecord::Schema.define(version: 2021_09_01_023832) do
     t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.bigint "book_id"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_stocks_on_book_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -62,5 +71,6 @@ ActiveRecord::Schema.define(version: 2021_09_01_023832) do
 
   add_foreign_key "borrowings", "books"
   add_foreign_key "borrowings", "users"
+  add_foreign_key "stocks", "books"
   add_foreign_key "users", "roles"
 end

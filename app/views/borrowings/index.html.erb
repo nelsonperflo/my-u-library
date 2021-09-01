@@ -4,15 +4,20 @@
   <h1><%= yield(:title) %></h1>
 <% end %>
 
-<p>
-  <%= link_to "New borrowing", new_borrowing_path, class: "btn btn-primary" %>
-</p>
+<% if current_user.librarian? %>
+  <p>
+    <%= link_to "New borrowing", new_borrowing_path, class: "btn btn-primary" %>
+  </p>
+<% end %>
 
 <% if @borrowings.size > 0 %>
   <table class="table">
     <thead class="thead-light">
       <tr>
-        <th>User</th>
+        <% if current_user.librarian? %>
+          <th>ID</th>
+          <th>Student</th>
+        <% end %>
         <th>Book</th>
         <th>Borrowed date</th>
         <th>Return date</th>

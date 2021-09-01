@@ -4,16 +4,40 @@
   <h1><%= yield(:title) %></h1>
 <% end %>
 
-<dl class="row">
-  <dt class="col-sm-2">Title</dt>
-  <dd class="col-sm-10"><%= @book.title %></dd>
-  <dt class="col-sm-2">Author</dt>
-  <dd class="col-sm-10"><%= @book.author %></dd>
-  <dt class="col-sm-2">Published year</dt>
-  <dd class="col-sm-10"><%= @book.published_year %></dd>
-  <dt class="col-sm-2">Genre</dt>
-  <dd class="col-sm-10"><%= @book.genre %></dd>
-</dl>
+<div class="row">
+  <div class="col-sm-9">
+    <dl class="row">
+      <dt class="col-sm-3">Title</dt>
+      <dd class="col-sm-9"><%= @book.title %></dd>
+      <dt class="col-sm-3">Author</dt>
+      <dd class="col-sm-9"><%= @book.author %></dd>
+      <dt class="col-sm-3">Published year</dt>
+      <dd class="col-sm-9"><%= @book.published_year %></dd>
+      <dt class="col-sm-3">Genre</dt>
+      <dd class="col-sm-9"><%= @book.genre %></dd>
+      <% if current_user.librarian? %>
+        <dt class="col-sm-3">Copies</dt>
+        <dd class="col-sm-9"><%= number_with_delimiter(@book.copies) %></dd>
+      <% end %>
+    </dl>
+  </div>
+  <div class="col-sm-3">
+    <div class="card">
+      <h5 class="card-header">Available copies</h5>
+      <div class="card-body">
+        <h3 class="card-title">Quantity <span class="badge badge-secondary"><%= @book.stock.present? ? number_with_delimiter(@book.stock.quantity) : 0 %></span></h3>
+        <% if current_user.student? && @book.stock.present? %>
+          <% if @book.stock.available? %>
+            <%= link_to "Check out!", checkout_book_path(@book), class: "btn btn-primary", method: :patch %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to "Edit book", edit_book_path(@book), class: "btn btn-secondary" %>
+<% if current_user.librarian? %>
+  <%= link_to "Edit book", edit_book_path(@book), class: "btn btn-secondary" %>
+<% end %>
+
 <%= link_to "Go to books page", books_path, class: "btn btn-link" %>

@@ -24,9 +24,32 @@ class BookTest < ActiveSupport::TestCase
     assert_not @book.valid?
   end
 
+  test "published year should be greater than 0" do
+    @book.published_year = -1
+    assert_not @book.valid?
+    @book.published_year = 0
+    assert_not @book.valid?
+    @book.published_year = 2000
+    assert @book.valid?
+  end
+
   test "genre should be present" do
     @book.genre = "    "
     assert_not @book.valid?
+  end
+
+  test "copies should be present" do
+    @book.copies = "    "
+    assert_not @book.valid?
+  end
+
+  test "copies should be greater than or equal to 0" do
+    @book.copies = -1
+    assert_not @book.valid?
+    @book.copies = 0
+    assert @book.valid?
+    @book.copies = 1
+    assert @book.valid?
   end
 
 end
