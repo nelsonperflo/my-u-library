@@ -1,7 +1,5 @@
 <tr>
-  <td class="text-center"><%= link_to user.id, user %></td>
-  <td><%= user.first_name %></td>
-  <td><%= user.last_name %></td>
+  <td><%= link_to user.full_name, user %></td>
   <td><%= user.email %></td>
-  <td><%= user.role %></td>
+  <td class="text-center"><%= user.role %></td>
 </tr>

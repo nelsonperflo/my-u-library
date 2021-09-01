@@ -1,0 +1,36 @@
+<% provide(:title, 'Books') %>
+
+<% content_for :page_header do %>
+  <h1><%= yield(:title) %></h1>
+<% end %>
+
+<p>
+  <div class="row">
+    <div class="col-md-5">
+      <%= render "shared/search", url: books_path, content: "Search title, autor or genre." %>
+    </div>
+  </div>
+</p>
+
+<p>
+  <%= link_to "New book", new_book_path, class: "btn btn-primary" %>
+</p>
+
+<% if @books.size > 0 %>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th class="text-center">Published year</th>
+        <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @books %>
+    </tbody>
+  </table>
+  <%= will_paginate %>
+<% else %>
+  <h4>There are no books.</h4>
+<% end %>

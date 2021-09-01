@@ -10,18 +10,18 @@
       <%= render 'shared/error_messages', object: f.object %>
       <div class='form-group required'>
         <%= f.label :first_name, class: 'control-label' %>
-        <%= f.text_field :first_name, class: 'form-control', required: true, autofocus: true %>
-        <small id="first_name_help" class="form-text text-black-50">Enter your first name.</small>
+        <%= f.text_field :first_name, class: 'form-control', required: false, autofocus: true %>
+        <small id="first_name_help" class="form-text text-black-50">Enter the first name.</small>
       </div>
       <div class='form-group required'>
         <%= f.label :last_name, class: 'control-label' %>
         <%= f.text_field :last_name, class: 'form-control', required: true %>
-        <small id="last_name_help" class="form-text text-black-50">Enter your last name.</small>
+        <small id="last_name_help" class="form-text text-black-50">Enter the last name.</small>
       </div>
       <div class='form-group required'>
         <%= f.label :email, class: 'control-label' %>
         <%= f.email_field :email, class: 'form-control', required: true %>
-        <small id="email_help" class="form-text text-black-50">Enter you email address.</small>
+        <small id="email_help" class="form-text text-black-50">Enter the email address.</small>
       </div>
       <div class='form-group required'>
         <%= f.label :password, class: 'control-label' %>

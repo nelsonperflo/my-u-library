@@ -1,0 +1,19 @@
+<% provide(:title, "Book: #{@book}") %>
+
+<% content_for :page_header do %>
+  <h1><%= yield(:title) %></h1>
+<% end %>
+
+<dl class="row">
+  <dt class="col-sm-2">Title</dt>
+  <dd class="col-sm-10"><%= @book.title %></dd>
+  <dt class="col-sm-2">Author</dt>
+  <dd class="col-sm-10"><%= @book.author %></dd>
+  <dt class="col-sm-2">Published year</dt>
+  <dd class="col-sm-10"><%= @book.published_year %></dd>
+  <dt class="col-sm-2">Genre</dt>
+  <dd class="col-sm-10"><%= @book.genre %></dd>
+</dl>
+
+<%= link_to "Edit book", edit_book_path(@book), class: "btn btn-secondary" %>
+<%= link_to "Go to books page", books_path, class: "btn btn-link" %>

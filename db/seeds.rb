@@ -24,3 +24,10 @@ User.create(first_name:  "Nelson",
               password_confirmation: "Fargo01$-",
               role: student)
 end
+
+50.times do |n|
+  Book.create(title:  "Title #{n}",
+              author: "Author #{n}",
+              published_year: rand(1970..2021),
+              genre: ["Crime", "Mistery", "Science fiction", "Thriller"].sample)
+end

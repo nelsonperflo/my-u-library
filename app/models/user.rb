@@ -40,13 +40,8 @@ class User < ApplicationRecord
       conditions, arguments = [], []
       terms = text.split
       terms.each do |key|
-        if key.include?("id:")
-          conditions << "id = ?"
-          arguments << "#{key.delete("id:")}"
-        else
-          conditions << "first_name ILIKE ? or last_name ILIKE ? or email ILIKE ?"
-          3.times { arguments << "%#{key}%" }
-        end
+        conditions << "first_name ILIKE ? or last_name ILIKE ? or email ILIKE ?"
+        3.times { arguments << "%#{key}%" }
       end
       where([conditions.join(' or '), arguments].flatten)
     else      

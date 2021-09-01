@@ -4,6 +4,6 @@ class Role < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   def to_s
-    name.capitalize
+    name
   end
 end
