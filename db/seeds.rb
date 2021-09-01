@@ -8,26 +8,32 @@
 
 student = Role.create(name: "student")
 librarian = Role.create(name: "librarian")
+password = "Fargo01$-"
 
-User.create(first_name:  "Nelson",
+# Create librarian user
+User.create(first_name: "Nelson",
             last_name: "Pérez",
             email: "nelson.perez@example.com",
-            password:              "Fargo01$-",
-            password_confirmation: "Fargo01$-",
+            password: password,
+            password_confirmation: password,
             role: librarian)
 
+# Create student users
 50.times do |n|
-  User.create(first_name:  "User #{n}",
-              last_name: "Example #{n}",
+  User.create(first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name,
               email: "user-#{n}@example.com",
-              password:              "Fargo01$-",
-              password_confirmation: "Fargo01$-",
+              password: password,
+              password_confirmation: password,
               role: student)
 end
 
+# Create books
 50.times do |n|
-  Book.create(title:  "Title #{n}",
-              author: "Author #{n}",
-              published_year: rand(1970..2021),
-              genre: ["Crime", "Mistery", "Science fiction", "Thriller"].sample)
+  b = Book.create(title: Faker::Book.title,
+                  author: Faker::Book.author,
+                  published_year: rand(1970..2021),
+                  genre: Faker::Book.genre,
+                  copies: rand(1..10))
+  b.create_stock(quantity: b.copies)
 end

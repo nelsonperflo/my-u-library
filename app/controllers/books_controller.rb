@@ -53,15 +53,14 @@ class BooksController < ApplicationController
           @book.stock.decrease!
           @borrowing.save!
         end
+        flash[:success] = "The book was check out successfully."
       rescue ActiveRecord::RecordInvalid, ActiveRecord::StatementInvalid => e
         flash[:danger] = e.message
       rescue Exception => e
         flash[:danger] = e
       ensure
-        redirect_to @book and return
+        redirect_to @book
       end
-      flash[:success] = "The book was check out successfully."
-      redirect_to @book
     else
       flash[:danger] = "The book was not checked out. Available copies: #{@book.stock.quantity}"
       redirect_to @book

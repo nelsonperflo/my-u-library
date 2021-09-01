@@ -1,7 +1,9 @@
 <tr>
   <% if current_user.librarian? %>
     <td><%= link_to borrowing.id, borrowing %></td>
-    <td><%= borrowing.user.full_name %></td>
+    <td><%= borrowing.user.first_name %></td>
+    <td><%= borrowing.user.last_name %></td>
+    <td><%= borrowing.user.email %></td>
   <% end %>
   <td><%= link_to borrowing.book, borrowing.book %></td>
   <td><%= borrowing.borrowed_date %></td>

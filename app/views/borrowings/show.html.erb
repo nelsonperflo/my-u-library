@@ -1,0 +1,60 @@
+<% provide(:title, "Borrowing ID: #{@borrowing.id}") %>
+
+<% content_for :page_header do %>
+  <h1><%= yield(:title) %></h1>
+<% end %>
+
+<dl class="row">
+  <dt class="col-sm-2">Borrowed date</dt>
+  <dd class="col-sm-10"><%= @borrowing.borrowed_date %></dd>
+  <dt class="col-sm-2">Return date</dt>
+  <dd class="col-sm-10">
+    <% if current_user.librarian? && @borrowing.not_returned? %>
+      <%= link_to "Return book", return_borrowing_path(@borrowing), class: "btn btn-primary", method: :patch %>
+    <% end %>
+    <%= @borrowing.return_date %>
+  </dd>
+</dl>
+
+<div class="row">
+  <div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">User</h5>
+      <div class="card-body">
+        <p class="card-text">
+          <dl class="row">
+            <dt class="col-sm-4">First name</dt>
+            <dd class="col-sm-8"><%= @user.first_name %></dd>
+            <dt class="col-sm-4">Last Name</dt>
+            <dd class="col-sm-8"><%= @user.last_name %></dd>
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8"><%= @user.email %></dd>
+          </dl>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">Book</h5>
+      <div class="card-body">
+        <p class="card-text">
+          <dl class="row">
+            <dt class="col-sm-4">Title</dt>
+            <dd class="col-sm-8"><%= @book.title %></dd>
+            <dt class="col-sm-4">Author</dt>
+            <dd class="col-sm-8"><%= @book.author %></dd>
+            <dt class="col-sm-4">Published year</dt>
+            <dd class="col-sm-8"><%= @book.published_year %></dd>
+            <dt class="col-sm-4">Genre</dt>
+            <dd class="col-sm-8"><%= @book.genre %></dd>
+            <dt class="col-sm-4">Copies</dt>
+            <dd class="col-sm-8"><%= number_with_delimiter(@book.copies) %></dd>
+          </dl>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Go to borrowings page", borrowings_path, class: "btn btn-link" %>

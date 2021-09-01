@@ -6,7 +6,11 @@
 
 <% if current_user.librarian? %>
   <p>
-    <%= link_to "New borrowing", new_borrowing_path, class: "btn btn-primary" %>
+    <div class="row">
+      <div class="col-md-5">
+        <%= render "shared/search", url: borrowings_path, content: "Search by first name, last name and email." %>
+      </div>
+    </div>
   </p>
 <% end %>
 
@@ -16,7 +20,9 @@
       <tr>
         <% if current_user.librarian? %>
           <th>ID</th>
-          <th>Student</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
         <% end %>
         <th>Book</th>
         <th>Borrowed date</th>
