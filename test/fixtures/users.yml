@@ -12,6 +12,13 @@ nelson:
   password_digest: <%= User.digest('Fargo01$-') %>
   role: librarian
 
+james:
+  first_name: James
+  last_name: Martin
+  email: james.martin2000@example.com
+  password_digest: <%= User.digest('Fargo01$-') %>
+  role: student
+
 <% 30.times do |n| %>
 usuario_<%= n %>:
   first_name:  <%= "User #{n}" %>
