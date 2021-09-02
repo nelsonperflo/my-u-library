@@ -10,6 +10,9 @@
       <div class="col-md-5">
         <%= render "shared/search", url: borrowings_path, content: "Search by first name, last name and email." %>
       </div>
+      <div class="col-md-7">
+        <%= link_to "Show all", show_all_borrowings_path, class: "btn btn-outline-primary" %>
+      </div>
     </div>
   </p>
 <% end %>

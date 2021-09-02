@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     patch 'checkout', on: :member
   end
   resources :borrowings do
-    patch 'return', on: :member
+    patch 'return',   on: :member
+    get   'show_all', on: :collection
   end
   resources :users
   resources :roles

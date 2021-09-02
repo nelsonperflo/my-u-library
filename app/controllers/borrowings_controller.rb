@@ -5,8 +5,8 @@ class BorrowingsController < ApplicationController
   def index
     if current_user.student?
       @borrowings = current_user.borrowings.includes(:book).order(id: :desc).paginate(page: params[:page])
-    else
-      @borrowings = Borrowing.includes(:book, :user)
+    elsif current_user.librarian?
+      @borrowings = Borrowing.unreturned_books.includes(:book, :user)
       if params.has_key?(:search) && params[:search].present?
         @borrowings = Borrowing.search(params[:search])
       end
@@ -36,6 +36,15 @@ class BorrowingsController < ApplicationController
     ensure
       redirect_to @borrowing
     end
+  end
+
+  def show_all
+    @borrowings = Borrowing.includes(:book, :user)
+    if params.has_key?(:search) && params[:search].present?
+      @borrowings = Borrowing.search(params[:search])
+    end
+    @borrowings = @borrowings.order(id: :desc).paginate(page: params[:page])
+    render 'index'
   end
 
 end
