@@ -6,11 +6,11 @@ class BorrowingsController < ApplicationController
     if current_user.student?
       @borrowings = current_user.borrowings.includes(:book).order(id: :desc).paginate(page: params[:page])
     elsif current_user.librarian?
-      @borrowings = Borrowing.unreturned_books.includes(:book, :user)
+      @borrowings = Borrowing.includes(:book, :user)
       if params.has_key?(:search) && params[:search].present?
         @borrowings = Borrowing.search(params[:search])
       end
-      @borrowings = @borrowings.order(id: :desc).paginate(page: params[:page])
+      @borrowings = @borrowings.unreturned_books.order(id: :desc).paginate(page: params[:page])
     end
   end
 

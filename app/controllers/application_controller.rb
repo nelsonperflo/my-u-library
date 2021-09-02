@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   private
 
     # Confirms a logged-in user.
@@ -24,6 +26,11 @@ class ApplicationController < ActionController::Base
         flash[:danger] = "You don't have permission to perform this action."
         redirect_to root_path
       end
+    end
+
+    def record_not_found
+      flash[:danger] = "Record not found."
+      redirect_to(request.referrer || root_path)
     end
 
 end
