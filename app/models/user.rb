@@ -18,10 +18,10 @@ class User < ApplicationRecord
                           (?=.*[A-Z])        # Must contain an upper case character
                           (?=.*[[:^alnum:]]) # Must contain a symbol
                         /x
-  validates :password, presence: true, length: { minimum: 8 }, format: { with: VALID_PASSWORD_REGEX }
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true, format: { with: VALID_PASSWORD_REGEX }
   validates :role_id, presence: true
 
- 
+
   def has_role?(*names)
     names.include?(role.name)
   end

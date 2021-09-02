@@ -2,9 +2,9 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @role = Role.new(name: "librarian")
+    @role = roles(:librarian)
     @user = User.new(first_name: "Example", last_name: "User", email: "user@example.com",
-                     password: "Fargo01$", password_confirmation: "Fargo01$", role: @role)
+                     password: "Fargo01$", password_confirmation: "Fargo01$", role_id: @role.id)
   end
 
   test "should be valid" do
@@ -63,7 +63,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
     @user.password = @user.password_confirmation = "Fargoabc01"
     assert_not @user.valid?
-    @user.password = @user.password_confirmation = "Fargo01$"
+    @user.password = @user.password_confirmation = "Fargo01$-"
     assert @user.valid?
   end
 

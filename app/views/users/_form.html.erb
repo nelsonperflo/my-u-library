@@ -36,13 +36,23 @@
         </div>
       <% end %>
       <div class='form-group required'>
-        <%= f.label :password, class: 'control-label' %>
-        <%= f.password_field :password, class: 'form-control', required: true %>
+        <% if f.object.new_record? %>
+          <%= f.label :password, class: 'control-label' %>
+          <%= f.password_field :password, class: 'form-control', required: true %>
+        <% else %>
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        <% end %>
         <small id="password_help" class="form-text text-black-50">Enter a strong password.</small>
       </div>
       <div class='form-group required'>
-        <%= f.label :password_confirmation, class: 'control-label' %>
-        <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+        <% if f.object.new_record? %>
+          <%= f.label :password_confirmation, class: 'control-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+        <% else %>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        <% end %>
         <small id="password_confirmation_help" class="form-text text-black-50">Confirm password.</small>
       </div>
       <% if current_user.librarian? %>
@@ -52,7 +62,7 @@
         </div>
       <% end %>
       <%= f.submit nil, class: "btn btn-primary", data: { disable_with: "Processing..." } %>
-      <%= link_to 'Cancel', users_path, class: "btn btn-secondary" %>
+      <%= link_to 'Cancel', :back, class: "btn btn-secondary" %>
     <% end %>
   </div>
 </div>
